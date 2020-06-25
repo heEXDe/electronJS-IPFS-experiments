@@ -21,16 +21,17 @@ function createWindow () {
 
 app.whenReady().then(createWindow);
 
-async function ipfs_action(){
+// ipfs file adding
+async function ipfs_add(){
     try {
         const node = await IPFS.create();
         const id = await node.id();
         const version = await node.version();
         console.log(id);
         console.log('Version: ', version);
-        const files = [{path: '/tmp/myfile.txt', content: 'ABC'}];
-        //const filesAdded = node.add(files);
-        for await (const result of node.add(files)) {
+        const file = [{path: '/tmp/myfile.txt', content: 'ABC'}];
+        //const filesAdded = node.add(file);
+        for await (const result of node.add(file)) {
             console.log(result);
         };
         //console.log(filesAdded);
@@ -40,7 +41,7 @@ async function ipfs_action(){
     catch (err) {
         console.error(err);
     }
-  document.getElementById('display_ipfs').innerHTML = 'It worked.';
+  //document.getElementById('display_ipfs').innerHTML = 'It worked.';
 }
 
 
