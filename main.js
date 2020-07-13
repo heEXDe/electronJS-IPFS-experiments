@@ -1,5 +1,5 @@
 const {app, BrowserWindow} = require('electron');
-const IPFS = require('ipfs');
+//const IPFS = require('ipfs');
 
 function createWindow () {
   // Create the browser window.
@@ -21,30 +21,6 @@ function createWindow () {
 
 app.whenReady().then(createWindow);
 
-// ipfs file adding
-async function ipfs_add(){
-    try {
-        const node = await IPFS.create();
-        const id = await node.id();
-        const version = await node.version();
-        console.log(id);
-        console.log('Version: ', version);
-        const file = [{path: '/tmp/myfile.txt', content: 'ABC'}];
-        //const filesAdded = node.add(file);
-        for await (const result of node.add(file)) {
-            console.log(result);
-        };
-        //console.log(filesAdded);
-        //const a = await filesAdded[0].path;
-        //console.log('Added file:', a, filesAdded[0].hash);
-    }
-    catch (err) {
-        console.error(err);
-    }
-  //document.getElementById('display_ipfs').innerHTML = 'It worked.';
-}
-
-
 app.on('window-all-closed', () => {
     app.quit();
 });
@@ -54,4 +30,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
